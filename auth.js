@@ -1,4 +1,5 @@
 import {SUPABASE_URL, SUPABASE_ANON_KEY} from './auth-config.js';
+import {createClient} from '@supabase/supabase-js';
 let client=null;let currentUser=null;
 const listeners=new Set();
 export const authReady=()=>Boolean(SUPABASE_URL&&SUPABASE_ANON_KEY);
@@ -8,11 +9,10 @@ export const onAuth=fn=>{listeners.add(fn);return ()=>listeners.delete(fn)};
 export async function initializeAuth(){
  if(!authReady())return;
  try{
-  const {createClient}=await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
   client=createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
   const {data}=await client.auth.getUser();currentUser=data?.user||null;emit();
   client.auth.onAuthStateChange((_event,session)=>{currentUser=session?.user||null;emit()});
- }catch(e){console.warn('Login unavailable:',e)}
+ }catch(e){console.error('Supabase initialization failed:',e);throw e}
 }
 export async function googleLogin(){
  if(!client)throw Error('Google login requires Supabase configuration');
