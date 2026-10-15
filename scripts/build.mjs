@@ -4,7 +4,7 @@ const root = new URL('../', import.meta.url);
 const dir = new URL('../dist/', import.meta.url);
 await rm(dir, { recursive: true, force: true });
 await mkdir(dir, { recursive: true });
-for (const file of ['index.html','styles.css','auth-config.js','universities.js','privacy.html','manifest.webmanifest','favicon.svg','sw.js','register-sw.js']) {
+for (const file of ['index.html','styles.css','auth-config.js','universities.js','pathway.js','privacy.html','manifest.webmanifest','favicon.svg','sw.js','register-sw.js']) {
   await cp(new URL(file, root), new URL(file, dir));
 }
 await mkdir(new URL('assets/', dir), { recursive: true });
