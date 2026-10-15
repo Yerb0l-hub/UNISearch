@@ -1,0 +1,12 @@
+{
+  "name": "unisearch",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "UNISearch - a university discovery and profile matching MVP",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check app.js && node --check universities.js && node --check api/advisor.js && node scripts/check.mjs"
+  },
+  "engines": {"node": ">=22"}
+}
