@@ -8,5 +8,13 @@
     "build": "node scripts/build.mjs",
     "check": "node --check app.js && node --check universities.js && node --check api/advisor.js && node scripts/check.mjs"
   },
-  "engines": {"node": ">=22"}
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
 }
